@@ -1,31 +1,37 @@
-google.charts.load('current', {'packages':['corechart']});
+google.charts.load('current', {'packages':['corechart', 'bar']});
 
 // Set a callback to run when the Google Visualization API is loaded.
-google.charts.setOnLoadCallback(drawChart);
+google.charts.setOnLoadCallback(drawBasic);
 
 // Callback that creates and populates a data table,
 // instantiates the pie chart, passes in the data and
 // draws it.
-function drawChart() {
+function drawBasic() {
 
-  // Create the data table.
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Topping');
-  data.addColumn('number', 'Slices');
-  data.addRows([
-    ['Mushrooms', 3],
-    ['Onions', 1],
-    ['Olives', 1],
-    ['Zucchini', 1],
-    ['Pepperoni', 2]
-  ]);
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Toppings');
+      data.addColumn('number', 'People Who Liked It');
 
-  // Set chart options
-  var options = {'title':'How Much Pizza I Wish I Ate',
-                 'width':400,
-                 'height':300};
+      data.addRows([
+        ['Tomato', 6],
+        ['Pepperoni', 7],
+        ['Shrimp', 1],
+        ['Pineapple', 6],
+        ['Peppers', 4]
+      ]);
 
-  // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-  chart.draw(data, options);
-}
+      var options = {
+        title: 'Pizza Topping Popularity',
+        hAxis: {
+          title: 'Toppings',
+        },
+        vAxis: {
+          title: 'People Who Like It'
+        }
+      };
+
+      var chart = new google.visualization.ColumnChart(
+        document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+    }
